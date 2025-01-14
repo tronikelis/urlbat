@@ -1,3 +1,4 @@
+
 <h1 align="center">urlbat</h1>
 
 <h3 align="center">Inspired by <a href="https://github.com/balazsbotond/urlcat">urlcat</a></h3>
@@ -10,8 +11,19 @@
 <img src="https://img.shields.io/bundlephobia/minzip/urlbat?style=flat-square" />
 <img src="https://img.shields.io/npm/v/urlbat?style=flat-square" />
 <img src="https://img.shields.io/badge/dependencies-0-success?style=flat-square" />
- 
+
 </div>
+
+<!--toc:start-->
+- [What is this?](#what-is-this)
+- [Why](#why)
+- [Features](#features)
+- [Simple example](#simple-example)
+- [Install](#install)
+- [Options](#options)
+- [More on the array option](#more-on-the-array-option)
+- [Path segments](#path-segments)
+<!--toc:end-->
 
 ## What is this?
 
@@ -117,4 +129,21 @@ const url = urlbat(
     { array: "stringify" }
 );
 // https://example.com/user/123/info?nice=%5B%22a%22%2C%22b%22%2C%22c%22%5D
+```
+
+## Path segments
+
+From v5, the path segments are no longer just split by `/` but with `.` as well
+
+v4:
+
+```js
+// path segment error, unknown key id.html
+assert(urlbat("foo/:id.html", {id: 1}))
+```
+
+v5:
+
+```js
+assert(urlbat("foo/:id.html",{id: 1}), "foo/1.html")
 ```
