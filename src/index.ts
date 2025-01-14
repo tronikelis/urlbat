@@ -40,7 +40,12 @@ const urlbat = (
             .split("/")
             .map(seg => {
                 if (seg[0] === ":") {
-                    const key = seg.slice(1);
+                    let dotIdx = seg.indexOf(".");
+                    if (dotIdx === -1) {
+                        dotIdx = seg.length;
+                    }
+
+                    const key = seg.slice(1, dotIdx);
                     const value = FROZEN_PARAMS[key] as unknown;
 
                     if (!assert(value)) {
@@ -48,7 +53,7 @@ const urlbat = (
                     }
 
                     usedParams.push(key);
-                    return encodeURIComponent(String(value));
+                    return encodeURIComponent(String(value)) + seg.slice(dotIdx);
                 }
 
                 return seg;
