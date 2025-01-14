@@ -2,6 +2,12 @@ import urlbat from "../src/index.js";
 
 // credits to https://github.com/balazsbotond/urlcat for these test suites
 describe("urlbat", () => {
+    it("skips dot in path segment", () => {
+        const expected = "foo/1.html..";
+        const actual = urlbat("foo/:id.html..", { id: 1 });
+        expect(actual).toBe(expected);
+    });
+
     it("Concatenates the base URL and the path if no params are passed", () => {
         const expected = "http://example.com/path";
         const actual = urlbat("http://example.com", "path");
